@@ -1,0 +1,5 @@
+newmtl locomotive_diesel
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+d 1.000000
+map_Ka immersiverailways:models/locomotive_diesel

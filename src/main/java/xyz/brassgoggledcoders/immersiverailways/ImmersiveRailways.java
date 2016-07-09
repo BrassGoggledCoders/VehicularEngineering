@@ -41,6 +41,11 @@ public class ImmersiveRailways extends BoilerplateModBase {
 	}
 
 	@Override
+	public boolean addOBJDomain() {
+		return true;
+	}
+
+	@Override
 	public Object getInstance() {
 		return INSTANCE;
 	}
