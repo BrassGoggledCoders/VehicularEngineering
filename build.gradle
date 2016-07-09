@@ -18,8 +18,8 @@ buildscript {
 
 repositories {
     maven {
-        name "K4Repo"
-        url "http://maven.k-4u.nl"
+        name "BrassGoggledCoders maven"
+        url "https://maven.brassgoggledcoders.xyz"
     }
 }
 
@@ -45,6 +45,10 @@ minecraft {
 compileJava {
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
+}
+
+dependencies {
+    compile "xyz.brassgoggledcoders.boilerplate:Boilerplate:${minecraft_version}-${boilerplate_version}:deobf"
 }
 
 processResources {
