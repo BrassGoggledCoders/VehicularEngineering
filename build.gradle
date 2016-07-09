@@ -1,0 +1,131 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+    }
+}
+
+repositories {
+    maven {
+        name "K4Repo"
+        url "http://maven.k-4u.nl"
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+
+def build = System.getenv("bamboo_buildNumber") != null ? "." + build : ""
+version = "${minecraft_version}-${immersiverailways_version}" + build
+
+group= "xyz.brassgoggledcoders.immersiverailways"
+archivesBaseName = "ImmersiveRailways"
+
+minecraft {
+    version = "${minecraft_version}-${forge_version}-${minecraft_version}"
+
+    mappings = "${mappings_version}"
+    runDir = "run/"
+    useDepAts = true
+
+    replace "@VERSION@", project.version
+    replaceIn "ImmersiveRailways.java"
+}
+
+compileJava {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
+
+jar {
+    classifier = ""
+}
+
+task deobfJar(type: Jar) {
+    from(sourceSets.main.output) {
+        classifier = "deobf"
+    }
+}
+
+artifacts {
+    archives deobfJar
+}
+
+idea {
+    module {
+        inheritOutputDirs = true
+    }
+}
+
+task("uploadJars", dependsOn: "reobf") {
+    description = "uploads JARs"
+    if (System.getenv("bamboo_local_maven") != null) {
+        apply plugin: 'maven'
+        uploadArchives {
+            repositories {
+                mavenDeployer {
+                    repository(url: "file://" + System.getenv("bamboo_local_maven"))
+                    pom {
+                        groupId = project.group
+                        version = project.version
+                        artifactId = project.archivesBaseName
+                        project {
+                            name project.archivesBaseName
+                            packaging 'jar'
+                            description 'ImmersiveRailways'
+                            url ''
+                            scm {
+                                url 'https://github.com/BrassGoggledCoders/ImmersiveRailways'
+                                connection 'scm:git:git@github.com:BrassGoggledCoders/ImmersiveRailways.git'
+                                developerConnection 'scm:git:git@github.com:BrassGoggledCoders/ImmersiveRailways.git'
+                            }
+                            issueManagement {
+                                system 'github'
+                                url 'https://github.com/BrassGoggledCoders/ImmersiveRailways/issues'
+                            }
+                            licenses {
+                                license {
+                                    name 'MIT'
+                                    url 'https://github.com/BrassGoggledCoders/ImmersiveRailways/blob/master/LICENSE'
+                                    distribution 'repo'
+                                }
+                            }
+                            developers {
+                                developer {
+                                    id 'SkySom'
+                                    name 'SkySom'
+                                    roles { role 'developer' }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
