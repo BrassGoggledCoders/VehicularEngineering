@@ -1,9 +1,11 @@
 package io.sommers.vehicularengineering;
 
 import com.teamacronymcoders.base.BaseModFoundation;
+import io.sommers.vehicularengineering.proxies.CommonProxy;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -21,6 +23,10 @@ public class VehicularEngineering extends BaseModFoundation<VehicularEngineering
     @Mod.Instance(MODID)
     public static VehicularEngineering instance;
 
+    @SidedProxy(clientSide = "io.sommers.vehicularengineering.proxies.ClientProxy",
+        serverSide = "io.sommers.vehicularengineering.proxies.CommonProxy")
+    public static CommonProxy proxy;
+
     public VehicularEngineering() {
         super(MODID, MODNAME, VERSION, CreativeTabs.TRANSPORTATION);
     }
@@ -35,6 +41,7 @@ public class VehicularEngineering extends BaseModFoundation<VehicularEngineering
     @Override
     public void init(FMLInitializationEvent event) {
         super.init(event);
+        proxy.init();
     }
 
     @EventHandler
