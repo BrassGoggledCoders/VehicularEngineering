@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.model.pipeline.LightUtil;
@@ -20,24 +21,26 @@ import javax.annotation.Nullable;
 
 public class EntityModelRenderer<ENTITY extends Entity> extends Render<ENTITY> {
     private ResourceLocation entityTexture;
-    private ResourceLocation modelLocation;
+    private Item item;
     private IBakedModel model;
 
-    public EntityModelRenderer(RenderManager renderManager, ResourceLocation modelLocation, ResourceLocation entityTexture) {
+    public EntityModelRenderer(RenderManager renderManager, Item item, ResourceLocation entityTexture) {
         super(renderManager);
-        this.modelLocation = modelLocation;
+        this.item = item;
         this.entityTexture = entityTexture;
         EntityModelHandler.addRenderer(this);
     }
 
     @Override
     public void doRender(@Nonnull ENTITY entity, double dx, double dy, double dz, float vanillaYaw, float partialTick) {
+        GlStateManager.pushMatrix();
         float yaw = entity.prevRotationYaw +
                 MathHelper.wrapDegrees(entity.rotationYaw - entity.prevRotationYaw) * partialTick;
         GlStateManager.translate(dx, dy, dz);
         GlStateManager.rotate(-yaw, 0F, 1F, 0F);
         bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
         renderModel(model);
+        GlStateManager.popMatrix();
     }
 
     private void renderModel(IBakedModel model) {
@@ -58,12 +61,8 @@ public class EntityModelRenderer<ENTITY extends Entity> extends Render<ENTITY> {
         return this.entityTexture;
     }
 
-    public ResourceLocation getTextureLocation() {
-        return this.entityTexture;
-    }
-
-    public ResourceLocation getModelLocation() {
-        return this.modelLocation;
+    public Item getItem() {
+        return this.item;
     }
 
     public void setModel(IBakedModel model) {

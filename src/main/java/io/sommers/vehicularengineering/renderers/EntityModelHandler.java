@@ -2,9 +2,12 @@ package io.sommers.vehicularengineering.renderers;
 
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelManager;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.ModelBakeEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -27,19 +30,18 @@ public class EntityModelHandler {
 
     public EntityModelHandler() {
         entityModelRenderers = Lists.newArrayList();
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
     public static void addRenderer(EntityModelRenderer entityEntityModelRenderer) {
         getInstance().entityModelRenderers.add(entityEntityModelRenderer);
     }
 
-    @SubscribeEvent
-    public void onModelBakeEvent(ModelBakeEvent event){
-        modelManager = event.getModelManager();
-    }
-
     public static void setModelsToRenderers() {
-        getInstance().entityModelRenderers.forEach(entityModelRenderer ->
-                getInstance().modelManager.getModel(new ModelResourceLocation(entityModelRenderer.getModelLocation().toString())));
+        getInstance().entityModelRenderers.forEach(entityModelRenderer -> {
+            IBakedModel model = Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
+                    .getItemModel(new ItemStack(entityModelRenderer.getItem()));
+            entityModelRenderer.setModel(model);
+        });
     }
 }
