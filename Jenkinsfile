@@ -22,7 +22,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying to Maven'
-                sh './gradlew uploadArchives
+                sh './gradlew uploadArchives'
             }
         }
     }
