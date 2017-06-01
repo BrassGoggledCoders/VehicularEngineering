@@ -6,13 +6,16 @@ import com.teamacronymcoders.base.registrysystem.EntityRegistry;
 import com.teamacronymcoders.base.registrysystem.ItemRegistry;
 import com.teamacronymcoders.base.registrysystem.config.ConfigRegistry;
 import io.sommers.vehicularengineering.modules.diesel.entities.EntityDieselBoat;
+import io.sommers.vehicularengineering.modules.diesel.entities.EntityDieselTrain;
 import io.sommers.vehicularengineering.modules.diesel.items.ItemDieselBoat;
+import io.sommers.vehicularengineering.modules.diesel.items.ItemDieselTrain;
 
 import static io.sommers.vehicularengineering.VehicularEngineering.MODID;
 
 @Module(MODID)
 public class DieselModule extends ModuleBase {
     public static ItemDieselBoat itemDieselBoat;
+    public static ItemDieselTrain itemDieselTrain;
 
     @Override
     public String getName() {
@@ -26,10 +29,12 @@ public class DieselModule extends ModuleBase {
     @Override
     public void registerItems(ConfigRegistry configRegistry, ItemRegistry itemRegistry) {
         itemRegistry.register(itemDieselBoat = new ItemDieselBoat());
+        itemRegistry.register(itemDieselTrain = new ItemDieselTrain());
     }
 
     @Override
     public void registerEntities(ConfigRegistry configRegistry, EntityRegistry entityRegistry) {
         entityRegistry.register(EntityDieselBoat.class);
+        entityRegistry.register(EntityDieselTrain.class);
     }
 }

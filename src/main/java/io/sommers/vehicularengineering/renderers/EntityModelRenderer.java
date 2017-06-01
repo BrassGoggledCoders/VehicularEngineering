@@ -1,5 +1,7 @@
 package io.sommers.vehicularengineering.renderers;
 
+import com.google.common.collect.Lists;
+import com.teamacronymcoders.base.client.models.IHasModel;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.VertexBuffer;
@@ -24,10 +26,10 @@ public class EntityModelRenderer<ENTITY extends Entity> extends Render<ENTITY> {
     private Item item;
     private IBakedModel model;
 
-    public EntityModelRenderer(RenderManager renderManager, Item item, ResourceLocation entityTexture) {
+    public EntityModelRenderer(RenderManager renderManager, IHasModel item) {
         super(renderManager);
-        this.item = item;
-        this.entityTexture = entityTexture;
+        this.item = item.getItem();
+        this.entityTexture = item.getModelResourceLocations(Lists.newArrayList()).get(0);
         EntityModelHandler.addRenderer(this);
     }
 
@@ -38,7 +40,7 @@ public class EntityModelRenderer<ENTITY extends Entity> extends Render<ENTITY> {
                 MathHelper.wrapDegrees(entity.rotationYaw - entity.prevRotationYaw) * partialTick;
         GlStateManager.translate(dx, dy, dz);
         GlStateManager.rotate(-yaw, 0F, 1F, 0F);
-        bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+        this.bindEntityTexture(entity);
         renderModel(model);
         GlStateManager.popMatrix();
     }
