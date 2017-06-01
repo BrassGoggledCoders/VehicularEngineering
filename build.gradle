@@ -37,6 +37,9 @@ repositories {
     }
 }
 
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
 dependencies {
     deobfCompile "com.teamacronymcoders.base:base:${minecraftVersion}-${baseVersion}"
 }
@@ -57,5 +60,48 @@ processResources {
     // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude "mcmod.info"
+    }
+}
+
+apply plugin: 'maven'
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "file://" + (System.getenv("local_maven") != null ? System.getenv("local_maven") : System.getenv("bamboo_local_maven")))
+            pom {
+                groupId = project.group
+                version = project.version
+                artifactId = project.archivesBaseName
+                project {
+                    name project.archivesBaseName
+                    packaging 'jar'
+                    description project.archivesBaseName
+                    url ''
+                    scm {
+                        url 'https://github.com/BrassGoggledCoders/VehicularEngineering'
+                        connection 'scm:git:git@github.com:BrassGoggledCoders/VehicularEngineering.git'
+                        developerConnection 'scm:git:git@github.com:BrassGoggledCoders/VehicularEngineering.git'
+                    }
+                    issueManagement {
+                        system 'github'
+                        url 'https://github.com/BrassGoggledCoders/VehicularEngineering/issues'
+                    }
+                    licenses {
+                        license {
+                            name 'MIT'
+                            url 'https://github.com/BrassGoggledCoders/VehicularEngineering/blob/master/LICENSE'
+                            distribution 'repo'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id 'SkySom'
+                            name 'SkySom'
+                            roles { role 'developer' }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
