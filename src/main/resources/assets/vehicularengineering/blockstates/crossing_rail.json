@@ -1,0 +1,20 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {
+            "rail": "vehicularengineering:blocks/rails/crossing_rail"
+        },
+        "transform": "forge:default-block",
+        "model": "rail_flat"
+    },
+    "variants": {
+        "normal": [{}],
+        "inventory": [{}],
+        "shape=north_south": [{
+
+        }],
+        "shape=east_west": [{
+
+        }]
+    }
+}
