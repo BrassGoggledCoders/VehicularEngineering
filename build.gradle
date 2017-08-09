@@ -7,7 +7,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath "net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT"
+        classpath "net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT"
     }
 }
 
@@ -41,7 +41,7 @@ sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 dependencies {
-    deobfCompile "com.teamacronymcoders.base:base:${minecraftVersion}-${baseVersion}"
+    deobfCompile "com.teamacronymcoders.base:base:${minecraftVersion}-${baseVersion}-Snapshot.+"
 }
 
 processResources {
