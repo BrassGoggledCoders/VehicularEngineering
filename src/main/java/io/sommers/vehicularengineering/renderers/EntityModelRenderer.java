@@ -2,14 +2,13 @@ package io.sommers.vehicularengineering.renderers;
 
 import com.google.common.collect.Lists;
 import com.teamacronymcoders.base.client.models.IHasModel;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
@@ -47,7 +46,7 @@ public class EntityModelRenderer<ENTITY extends Entity> extends Render<ENTITY> {
 
     private void renderModel(IBakedModel model) {
         Tessellator tessellator = Tessellator.getInstance();
-        VertexBuffer worldRenderer = tessellator.getBuffer();
+        BufferBuilder worldRenderer = tessellator.getBuffer();
         worldRenderer.begin(GL11.GL_QUADS, DefaultVertexFormats.ITEM);
 
         for (BakedQuad bakedquad : model.getQuads(null, null, 0)) {
