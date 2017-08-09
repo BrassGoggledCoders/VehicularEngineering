@@ -1,0 +1,49 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "rail": "vehicularengineering:blocks/rails/boarding_rail"
+    },
+    "transform": "forge:default-block",
+    "model": "rail_flat"
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}],
+    "north_west=true,powered=false,shape=north_south": [{
+
+    }],
+    "north_west=false,powered=false,shape=east_west": [{
+      "y": 90
+    }],
+    "north_west=false,powered=false,shape=north_south": [{
+      "y": 180
+    }],
+    "north_west=true,powered=false,shape=east_west": [{
+      "y": 270
+    }],
+    "north_west=true,powered=true,shape=north_south": [{
+      "textures": {
+        "rail": "vehicularengineering:blocks/rails/boarding_rail_powered"
+      }
+    }],
+    "north_west=false,powered=true,shape=east_west": [{
+      "textures": {
+        "rail": "vehicularengineering:blocks/rails/boarding_rail_powered"
+      },
+      "y": 90
+    }],
+    "north_west=false,powered=true,shape=north_south": [{
+      "textures": {
+        "rail": "vehicularengineering:blocks/rails/boarding_rail_powered"
+      },
+      "y": 180
+    }],
+    "north_west=true,powered=true,shape=east_west": [{
+      "textures": {
+        "rail": "vehicularengineering:blocks/rails/boarding_rail_powered"
+      },
+      "y": 270
+    }]
+  }
+}
