@@ -1,6 +1,6 @@
 # Blender v2.78 (sub 0) OBJ File: 'Train_steam.blend'
 # www.blender.org
-mtllib Train_steam.mtl
+mtllib train.mtl
 o Cube.000_Cube.004
 v 0.375000 0.375000 0.750000
 v 0.375000 0.000000 0.375000
@@ -798,7 +798,7 @@ vn 0.3827 -0.9239 0.0000
 vn 0.9239 0.3827 0.0000
 vn 0.7071 0.7071 0.0000
 vn -0.7071 0.7071 0.0000
-usemtl Material
+usemtl train
 s off
 f 12/1/1 15/2/1 9/3/1 6/4/1
 f 5/5/2 4/6/2 10/7/2 8/8/2

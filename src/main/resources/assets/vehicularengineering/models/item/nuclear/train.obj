@@ -1,6 +1,6 @@
 # Blender v2.77 (sub 0) OBJ File: 'Train_pebblereactor.blend'
 # www.blender.org
-mtllib Train_pebblereactor.mtl
+mtllib train.mtl
 o Cube.001_Cube.010
 v -5.000000 16.875000 11.250000
 v -0.625000 16.875000 11.250000
@@ -1336,7 +1336,7 @@ vn -0.7071 0.0000 -0.7071
 vn 0.0000 -0.7071 -0.7071
 vn 0.0000 0.7071 -0.7071
 vn 0.7071 0.0000 -0.7071
-usemtl Material
+usemtl train
 s off
 f 1/1/1 4/2/1 3/3/1 2/4/1
 f 8/5/1 5/6/1 6/7/1 7/8/1
