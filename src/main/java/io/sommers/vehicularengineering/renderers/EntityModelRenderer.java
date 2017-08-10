@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
@@ -19,14 +20,12 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class EntityModelRenderer<ENTITY extends Entity> extends Render<ENTITY> {
-    private ResourceLocation entityTexture;
     private Item item;
     private IBakedModel model;
 
-    public EntityModelRenderer(RenderManager renderManager, Item item, ResourceLocation textureLocation) {
+    public EntityModelRenderer(RenderManager renderManager, Item item) {
         super(renderManager);
         this.item = item;
-        this.entityTexture = textureLocation;
         EntityModelHandler.addRenderer(this);
     }
 
@@ -37,7 +36,7 @@ public class EntityModelRenderer<ENTITY extends Entity> extends Render<ENTITY> {
                 MathHelper.wrapDegrees(entity.rotationYaw - entity.prevRotationYaw) * partialTick;
         GlStateManager.translate(dx, dy, dz);
         GlStateManager.rotate(-yaw, 0F, 1F, 0F);
-        this.bindEntityTexture(entity);
+        this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
         renderModel(model);
         GlStateManager.popMatrix();
     }
@@ -57,7 +56,7 @@ public class EntityModelRenderer<ENTITY extends Entity> extends Render<ENTITY> {
     @Nullable
     @Override
     protected ResourceLocation getEntityTexture(@Nonnull ENTITY entity) {
-        return this.entityTexture;
+        return null;
     }
 
     public Item getItem() {
