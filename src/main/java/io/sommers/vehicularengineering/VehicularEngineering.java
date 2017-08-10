@@ -41,13 +41,18 @@ public class VehicularEngineering extends BaseModFoundation<VehicularEngineering
     @Override
     public void init(FMLInitializationEvent event) {
         super.init(event);
-        proxy.init();
     }
 
     @EventHandler
     @Override
     public void postInit(FMLPostInitializationEvent event) {
         super.postInit(event);
+        proxy.init();
+    }
+
+    @Override
+    public boolean useModAsConfigFolder() {
+        return false;
     }
 
     @Override

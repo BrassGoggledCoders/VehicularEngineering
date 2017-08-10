@@ -1,6 +1,7 @@
 package io.sommers.vehicularengineering.modules.diesel.entities;
 
 import io.sommers.vehicularengineering.boats.EntityPoweredBoatBase;
+import io.sommers.vehicularengineering.modules.diesel.DieselModule;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
@@ -18,6 +19,6 @@ public class EntityDieselBoat extends EntityPoweredBoatBase {
     @Nonnull
     @Override
     public Item getItemBoat() {
-        return null;
+        return DieselModule.itemDieselBoat;
     }
 }

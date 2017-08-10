@@ -18,7 +18,6 @@ import java.util.List;
 public class EntityModelHandler {
     private static EntityModelHandler instance;
 
-    private ModelManager modelManager;
     private List<EntityModelRenderer> entityModelRenderers;
 
     public static EntityModelHandler getInstance() {

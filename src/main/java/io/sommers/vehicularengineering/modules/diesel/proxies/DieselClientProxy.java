@@ -17,7 +17,9 @@ import static io.sommers.vehicularengineering.VehicularEngineering.MODID;
 public class DieselClientProxy extends ModuleProxyBase {
     @Override
     public void preInit(FMLPreInitializationEvent event) {
-        RenderingRegistry.registerEntityRenderingHandler(EntityDieselBoat.class, render -> new EntityModelRenderer<>(render, DieselModule.itemDieselBoat));
-        RenderingRegistry.registerEntityRenderingHandler(EntityDieselTrain.class, render -> new EntityModelRenderer<>(render, DieselModule.itemDieselBoat));
+        RenderingRegistry.registerEntityRenderingHandler(EntityDieselBoat.class, render -> new EntityModelRenderer<>(render,
+                DieselModule.itemDieselBoat, new ResourceLocation(MODID, "textures/diesel/boat.png")));
+        RenderingRegistry.registerEntityRenderingHandler(EntityDieselTrain.class, render -> new EntityModelRenderer<>(render,
+                DieselModule.itemDieselTrain,new ResourceLocation(MODID, "textures/diesel/train.png")));
     }
 }

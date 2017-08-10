@@ -31,7 +31,6 @@ public abstract class BlockTrackBase extends BlockRailBase implements IHasModel,
         name += "_rail";
         this.name = name;
         this.setUnlocalizedName(name);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FLAT_STRAIGHT_SHAPE, EnumRailDirection.NORTH_SOUTH));
     }
 
     @Override

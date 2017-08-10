@@ -28,16 +28,14 @@ import java.util.List;
 
 import static io.sommers.vehicularengineering.modules.tracks.blocks.TrackShapes.FLAT_STRAIGHT_SHAPE;
 
-public class BlockTrackBoarding extends BlockRailPowered implements IHasModel, IHasItemBlock {
+public class BlockTrackBoarding extends BlockTrackBase {
     public static final PropertyBool POWERED = PropertyBool.create("powered");
     public static final PropertyBool NORTH_WEST = PropertyBool.create("north_west");
 
     private ItemBlock itemBlock;
 
     public BlockTrackBoarding() {
-        super();
-        this.setUnlocalizedName("boarding_rail");
-        this.itemBlock = new ItemBlockGeneric<>(this);
+        super("boarding");
         this.setDefaultState(this.blockState.getBaseState()
                 .withProperty(FLAT_STRAIGHT_SHAPE, EnumRailDirection.NORTH_SOUTH).withProperty(POWERED, false)
                 .withProperty(NORTH_WEST, true));
@@ -87,8 +85,7 @@ public class BlockTrackBoarding extends BlockRailPowered implements IHasModel, I
     @ParametersAreNonnullByDefault
     public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
         boolean isStatePowered = state.getValue(POWERED);
-        boolean isWorldPowered = world.isBlockPowered(pos) || this.findPoweredRailSignal(world, pos, state, true, 0) ||
-                this.findPoweredRailSignal(world, pos, state, false, 0);
+        boolean isWorldPowered = world.isBlockPowered(pos);
 
         if (isWorldPowered != isStatePowered) {
             world.setBlockState(pos, state.withProperty(POWERED, isWorldPowered), 3);
@@ -121,27 +118,5 @@ public class BlockTrackBoarding extends BlockRailPowered implements IHasModel, I
         stateArray[2] = state.getValue(NORTH_WEST);
 
         return BitUtils.getIntFromBooleanArray(stateArray);
-    }
-
-    @Override
-    @Nonnull
-    public IProperty<EnumRailDirection> getShapeProperty() {
-        return FLAT_STRAIGHT_SHAPE;
-    }
-
-    @Override
-    public List<String> getModelNames(List<String> names) {
-        names.add("boarding_rail");
-        return names;
-    }
-
-    @Override
-    public ItemBlock getItemBlock() {
-        return this.itemBlock;
-    }
-
-    @Override
-    public Item getItem() {
-        return this.getItemBlock();
     }
 }
