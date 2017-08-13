@@ -1,6 +1,6 @@
 package io.sommers.vehicularengineering.modules.diesel.entities;
 
-import io.sommers.vehicularengineering.boats.EntityPoweredBoatBase;
+import io.sommers.vehicularengineering.boats.entities.EntityPoweredBoatBase;
 import io.sommers.vehicularengineering.modules.diesel.DieselModule;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;

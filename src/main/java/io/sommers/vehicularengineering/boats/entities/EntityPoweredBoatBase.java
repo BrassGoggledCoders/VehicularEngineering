@@ -1,4 +1,4 @@
-package io.sommers.vehicularengineering.boats;
+package io.sommers.vehicularengineering.boats.entities;
 
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.item.Item;
@@ -18,6 +18,4 @@ public abstract class EntityPoweredBoatBase extends EntityBoat {
     @Override
     @Nonnull
     public abstract Item getItemBoat();
-
-
 }

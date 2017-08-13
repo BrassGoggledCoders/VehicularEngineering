@@ -36,11 +36,7 @@ public class DieselModule extends ModuleBase {
 
     @Override
     public void registerEntities(ConfigRegistry configRegistry, EntityRegistry entityRegistry) {
-        //entityRegistry.register(EntityDieselBoat.class);
-        net.minecraftforge.fml.common.registry.EntityRegistry.registerModEntity(new ResourceLocation("vehicularengineering","diesel_boat"),
-                EntityDieselBoat.class, "boat", 0, VehicularEngineering.instance,
-                60, 60, true);
-
-        //entityRegistry.register(EntityDieselTrain.class);
+        entityRegistry.register(EntityDieselBoat.class);
+        entityRegistry.register(EntityDieselTrain.class);
     }
 }
