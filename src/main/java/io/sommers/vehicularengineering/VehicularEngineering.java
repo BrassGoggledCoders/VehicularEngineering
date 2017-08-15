@@ -9,7 +9,6 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.relauncher.Side;
 
 import static io.sommers.vehicularengineering.VehicularEngineering.*;
 
@@ -47,7 +46,7 @@ public class VehicularEngineering extends BaseModFoundation<VehicularEngineering
     @Override
     public void postInit(FMLPostInitializationEvent event) {
         super.postInit(event);
-        proxy.init();
+        proxy.postInit();
     }
 
     @Override

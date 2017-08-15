@@ -8,7 +8,11 @@
     }
   },
   "variants": {
-    "inventory": [{}],
+    "inventory": [{
+      "transform": {
+        "scale": 0.05
+      }
+    }],
     "normal": [{}]
   }
 }
