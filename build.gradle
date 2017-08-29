@@ -42,6 +42,7 @@ targetCompatibility = JavaVersion.VERSION_1_8
 
 dependencies {
     deobfCompile "com.teamacronymcoders.base:base:${minecraftVersion}-${baseVersion}-Snapshot.+"
+    deobfCompile "blusunrize:ImmersiveEngineering:${immersiveEngineeringVersion}"
 }
 
 processResources {
