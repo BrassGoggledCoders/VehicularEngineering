@@ -1,5 +1,6 @@
 package io.sommers.vehicularengineering.modules.tracks.blocks;
 
+import com.teamacronymcoders.base.IBaseMod;
 import com.teamacronymcoders.base.blocks.IHasItemBlock;
 import com.teamacronymcoders.base.client.models.IHasModel;
 import com.teamacronymcoders.base.items.itemblocks.ItemBlockGeneric;
@@ -19,8 +20,9 @@ import java.util.List;
 import static io.sommers.vehicularengineering.modules.tracks.blocks.TrackShapes.FLAT_STRAIGHT_SHAPE;
 
 public abstract class BlockTrackBase extends BlockRailBase implements IHasModel, IHasItemBlock {
-    public String name;
+    private String name;
     private ItemBlock itemBlock;
+    private IBaseMod mod;
 
     protected BlockTrackBase(String name) {
         this(name, false);
@@ -88,5 +90,15 @@ public abstract class BlockTrackBase extends BlockRailBase implements IHasModel,
             this.itemBlock = new ItemBlockGeneric<>(this);
         }
         return this.itemBlock;
+    }
+
+    @Override
+    public IBaseMod getMod() {
+        return this.mod;
+    }
+
+    @Override
+    public void setMod(IBaseMod mod) {
+        this.mod = mod;
     }
 }
