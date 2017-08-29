@@ -3,6 +3,7 @@ package io.sommers.vehicularengineering.trains.renderers;
 import io.sommers.vehicularengineering.renderers.ModelOBJ;
 import io.sommers.vehicularengineering.trains.entities.EntityTrainBase;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.culling.ICamera;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
@@ -23,12 +24,9 @@ public class RenderTrainBase<T extends EntityTrainBase> extends Render<T> {
     @Override
     public void doRender(@Nonnull T entity, double x, double y, double z, float entityYaw, float partialTicks) {
         GlStateManager.pushMatrix();
-        this.bindEntityTexture(entity);
-        long i = (long) entity.getEntityId() * 493286711L;
-        i = i * i * 4392167121L + i * 98761L;
-        float f = (((float) (i >> 16 & 7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
-        float f1 = (((float) (i >> 20 & 7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
-        float f2 = (((float) (i >> 24 & 7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
+        float f = (((float) (7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
+        float f1 = (((float) (7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
+        float f2 = (((float) (7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
         GlStateManager.translate(f, f1, f2);
         double d0 = entity.lastTickPosX + (entity.posX - entity.lastTickPosX) * (double) partialTicks;
         double d1 = entity.lastTickPosY + (entity.posY - entity.lastTickPosY) * (double) partialTicks;
@@ -78,7 +76,7 @@ public class RenderTrainBase<T extends EntityTrainBase> extends Render<T> {
             GlStateManager.enableColorMaterial();
             GlStateManager.enableOutlineMode(this.getTeamColor(entity));
         }
-
+        GlStateManager.pushMatrix();
         renderModel(entity);
         GlStateManager.popMatrix();
 
@@ -86,6 +84,7 @@ public class RenderTrainBase<T extends EntityTrainBase> extends Render<T> {
             GlStateManager.disableOutlineMode();
             GlStateManager.disableColorMaterial();
         }
+        GlStateManager.popMatrix();
     }
 
     protected void renderModel(T entity) {
